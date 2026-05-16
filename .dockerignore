@@ -1,0 +1,12 @@
+.git
+.gitignore
+.DS_Store
+.secrets
+
+backend/target
+frontend/node_modules
+frontend/dist
+
+**/.env
+**/.env.*
+**/*.log

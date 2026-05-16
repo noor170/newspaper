@@ -1,0 +1,54 @@
+version: "3.9"
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: news-portal:local
+    container_name: news-portal-app
+    ports:
+      - "8080:8080"
+    environment:
+      PORT: 8080
+      FIREBASE_PROJECT_ID: local-news-portal
+      FIREBASE_CLIENT_EMAIL: firebase-adminsdk@example.local
+      FIREBASE_PRIVATE_KEY: |
+        -----BEGIN PRIVATE KEY-----
+        local-development-private-key
+        -----END PRIVATE KEY-----
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/news_portal
+      SPRING_DATASOURCE_USERNAME: news_portal
+      SPRING_DATASOURCE_PASSWORD: news_portal
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - news-portal-net
+
+  postgres:
+    image: postgres:16-alpine
+    container_name: news-portal-postgres
+    environment:
+      POSTGRES_DB: news_portal
+      POSTGRES_USER: news_portal
+      POSTGRES_PASSWORD: news_portal
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U news_portal -d news_portal"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - news-portal-net
+
+networks:
+  news-portal-net:
+    driver: bridge
+
+volumes:
+  postgres_data:
