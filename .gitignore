@@ -4,6 +4,15 @@ frontend/*.tsbuildinfo
 frontend/vite.config.js
 frontend/vite.config.d.ts
 backend/target/
+backend/app/uploads/
+backend/app/__pycache__/
+backend/__pycache__/
+*.db
+.ruff_cache/
 .idea/
 .vscode/
 .DS_Store
+__pycache__/
+*.pyc
+.env
+.env.local

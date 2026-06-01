@@ -1,6 +1,4 @@
-// Use ?? so an explicit empty VITE_API_URL (Docker/nginx) is not treated as missing.
-export const API_BASE =
-  import.meta.env.VITE_API_URL ?? (import.meta.env.PROD ? "/_/backend" : "");
+export const API_BASE = import.meta.env.VITE_API_URL ?? "";
 
 export const NEWS_ENDPOINT = `${API_BASE}/api/v1/news`;
 export const META_ENDPOINT = `${API_BASE}/api/v1/meta`;
