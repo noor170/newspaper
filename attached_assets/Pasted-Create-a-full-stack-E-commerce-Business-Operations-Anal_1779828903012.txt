@@ -1,0 +1,31 @@
+Create a full-stack E-commerce Business Operations & Analytics Dashboard application structured for Replit. The workspace needs a Python FastAPI backend and a React frontend.
+
+Please set up the project matching the following architectural and file structure requirements:
+
+1. WORKSPACE STRUCTURE
+Create a clean directory layout dividing the components:
+- `backend/app/main.py`, `database.py`, `analytics.py`
+- `backend/requirements.txt`
+- `frontend/src/App.jsx`, `Dashboard.jsx`, `main.jsx`
+- `frontend/package.json`
+- `.github/workflows/deploy.yml`
+- `README.md`
+
+2. BACKEND LAYER (Python & FastAPI)
+- Use FastAPI to serve a RESTful API with proper CORS configuration enabling web communication.
+- Create a configuration file (`database.py`) using SQLAlchemy designed to interface with an AWS MySQL RDS instance using environment variables (DB_USER, DB_PASSWORD, DB_HOST, DB_NAME). Provide a safe SQLite fallback configuration so the app runs out-of-the-box inside Replit if variables are missing.
+- In `analytics.py`, implement an analytics engine using Pandas and NumPy. Write a function that queries transactional records, handles missing metrics with Pandas, and uses NumPy vectorized filtering (np.where) to flag individual revenue data anomalies greater than 2 standard deviations out.
+- Use Matplotlib and Seaborn (with a darkgrid theme and Agg backend configuration) to generate a static distribution profile chart saved as 'sales_distribution.png'.
+
+3. FRONTEND LAYER (React & Chart.js)
+- Set up a React app inside the frontend folder using Vite as the bundler.
+- Build an administrative dashboard interface inside `Dashboard.jsx`.
+- Fetch metrics from the FastAPI endpoint (`/api/v1/operations/dashboard`). If the connection drops or is missing database records, implement a robust try/catch block that serves clean fallback mock data metrics.
+- Display a Top Row of stylized cards showing: Gross Revenue, Operational Anomalies (count), and Mean Order Ticket Value.
+- Embed a responsive line chart below using Chart.js (`react-chartjs-2`) mapping monthly gross operational scaling.
+
+4. DEVOPS & INFRASTRUCTURE
+- Build a `.github/workflows/deploy.yml` pipeline that runs on pushes to the 'main' branch, handles dependency installation requirements, and mocks code check verifications.
+- Add a detailed `README.md` containing operational layout summaries and instructions for running the frontend and backend microservices concurrently inside the Replit environment.
+
+Please generate all files completely with actual operational code blocks. Avoid utilizing empty functions or code placeholders.

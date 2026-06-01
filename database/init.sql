@@ -1,0 +1,2 @@
+-- Bangla News 24 — schema is created by the backend on startup (SQLAlchemy).
+-- MySQL creates the database from MYSQL_DATABASE in docker-compose.
